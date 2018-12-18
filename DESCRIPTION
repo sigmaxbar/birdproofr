@@ -1,0 +1,13 @@
+Package: birdproofr
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: What the package does (one paragraph).
+Depends: R (>= 3.4.3), shiny (>= 1.2.0), dplyr (>= 0.7.5)
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
