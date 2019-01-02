@@ -30,7 +30,7 @@ The birdproofr functions are now ready for use. For example, run the Shiny app:
 > run_birdproofr_app()
 
 ## Functions
-Please see the [birdproofr manual](https://github.com/twotailstats/birdproofr/manual.pdf) for more information.
+Please see the [birdproofr manual](https://github.com/twotailstats/birdproofr/blob/master/manual.pdf) for more information.
 
 ## Changelog
 ### v1.0.0 (December 31, 2018)
