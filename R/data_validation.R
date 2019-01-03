@@ -3,6 +3,7 @@
 #'
 #'@param df bird data frame
 #'@return list of issue data frames
+#'@export
 #'
 validate_all_list <- function(df) {
   all_list <- list(validate_species(df), validate_age(df), validate_sex(df),
@@ -32,6 +33,7 @@ validate_all_list <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with species issues
+#'@export
 #'
 validate_species <- function(df) {
   valid_species_list <- c("amgo", "amke", "amre", "amro", "auwa", "bade", "balo", "bcch", "bewr", "bggn",
@@ -57,6 +59,7 @@ validate_species <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age issues
+#'@export
 #'
 validate_age <- function(df) {
   valid_age_list <- c(0,1,2,3,4,5,6)
@@ -72,6 +75,7 @@ validate_age <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with sex issues
+#'@export
 #'
 validate_sex <- function(df) {
   sex_issues <- filter(df, !(SEX == "M" | SEX == "F" | SEX == "U"))
@@ -87,6 +91,7 @@ validate_sex <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/BP/CP issues
+#'@export
 #'
 validate_age_bp_cp <- function(df) {
   bpcp_issues <- filter(df, AGE == 0 | AGE == 2 | AGE == 4, BP != 0, CP != 0)
@@ -110,6 +115,7 @@ validate_age_bp_cp <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with hs/sex issues
+#'@export
 #'
 validate_sex_hs <- function(df) {
   sex_hs_issues <- filter(df,
@@ -129,6 +135,7 @@ validate_sex_hs <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with BP/how sexed issues for females
+#'@export
 #'
 validate_bp_hs <- function(df) {
   fhs_bp_issues <- filter(df, SEX == "F", HS == "BP", BP == 0 | is.na(BP))
@@ -144,6 +151,7 @@ validate_bp_hs <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with CP/how sexed issues for males
+#'@export
 #'
 validate_cp_hs <- function(df) {
   mhs_cp_issues <- filter(df, SEX == "M", HS == "CL", !(CP == 2 | CP == 3))
@@ -158,6 +166,7 @@ validate_cp_hs <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with ffmolt issues
+#'@export
 #'
 validate_ffmolt <- function(df) {
   ffmolt_issues <- filter(df, !(is.na(FF.MLT) | FF.MLT == "N" | FF.MLT == "S" | FF.MLT == "J" | FF.MLT == "A"))
@@ -172,6 +181,7 @@ validate_ffmolt <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with BP issues
+#'@export
 #'
 validate_bp <- function(df) {
   bp_issues <- filter(df, !is.na(BP), (BP > 5 | BP < 0))
@@ -186,6 +196,7 @@ validate_bp <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with CP issues
+#'@export
 #'
 validate_cp <- function(df) {
   cp_issues <- filter(df, !is.na(CP), (CP > 3 | CP < 0))
@@ -201,6 +212,7 @@ validate_cp <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with fat issues
+#'@export
 #'
 validate_fat <- function(df) {
   fat_issues <- filter(df, (FAT < 0 | FAT > 5), is.na(NOTES))
@@ -215,6 +227,7 @@ validate_fat <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with body molt issues
+#'@export
 #'
 validate_bmlt <- function(df) {
   bmlt_issues <- filter(df, !is.na(B.MLT), (B.MLT > 4 | B.MLT < 0))
@@ -229,6 +242,7 @@ validate_bmlt <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with ffwear issues
+#'@export
 #'
 validate_ffwear <- function(df) {
   ffwear_issues <- filter(df, !is.na(FF.WEAR), (FF.WEAR > 5 | FF.WEAR < 0))
@@ -244,6 +258,7 @@ validate_ffwear <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with muscle issues
+#'@export
 #'
 validate_muscle <- function(df) {
   valid_muscle_list <- c(1, 2, 2.5, 3, 4, 5, NA)
@@ -260,6 +275,7 @@ validate_muscle <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/skull issues
+#'@export
 #'
 validate_age_skull <- function(df) {
   skull_age_exceptions <- c("HETH", "SWTH", "DEJU", "ORJU", "UDEJ", "HAFL", "DUFL")
@@ -278,6 +294,7 @@ validate_age_skull <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with how aged/skull issues
+#'@export
 #'
 validate_ha_skull <- function(df) {
   skull_ha_issues <- filter(df, (SKULL == 7 | SKULL == 8) & HA == "SK")
@@ -292,6 +309,7 @@ validate_ha_skull <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with location issues
+#'@export
 #'
 validate_location <- function(df) {
   location_issues <- filter(df, is.na(LOCATION))
@@ -307,6 +325,7 @@ validate_location <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with band size issues
+#'@export
 #'
 validate_bandsize <- function(df) {
   valid_band_sizes <- c("OA", "O", 1, "1B", "1A", "1C", 2, 3, "3A", "3B", "U", "R")
@@ -322,6 +341,7 @@ validate_bandsize <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with band size/disp issues
+#'@export
 #'
 validate_bandsize_disp <- function(df) {
   band_size_disp_issues <- filter(df, (BANDSIZE == "U" & DISPOSITION..band.code. != "U") | (BANDSIZE == "R" & DISPOSITION..band.code. != "R"))
@@ -337,6 +357,7 @@ validate_bandsize_disp <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/ffmolt issues
+#'@export
 #'
 validate_age_ffmlt <- function(df) {
   age_ffmolt_exceptions <- c("YBCH", "SPTO", "SOSP", "HOFI", "NOFL", "RSFL", "HAWO")
@@ -359,6 +380,7 @@ validate_age_ffmlt <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with how aged/ffmolt issues
+#'@export
 #'
 validate_ha_ffmlt <- function(df) {
   ha_ffmolt_issues <- filter(df, HA == "MR", !(FF.MLT == "S" | FF.MLT == "J"))
@@ -374,6 +396,7 @@ validate_ha_ffmlt <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with how aged/ffwear issues
+#'@export
 #'
 validate_ha_ffwear <- function(df) {
   ha_ffwear_issues <- filter(df, HA == "FF", is.na(FF.WEAR))
@@ -398,6 +421,7 @@ validate_ha_ffwear <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/ffwear issues
+#'@export
 #'
 validate_age_ffwear <- function(df) {
   age_ffwear_issues <- filter(df,
@@ -416,6 +440,7 @@ validate_age_ffwear <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with wing issues
+#'@export
 #'
 validate_wing <- function(df) {
   wing_issues <- filter(df, WING < 30 | WING > 200)
@@ -430,7 +455,7 @@ validate_wing <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with tail issues
-#'
+#'@export
 validate_tail <- function(df) {
   tail_issues <- filter(df, TAIL < 30 | TAIL > 200)
   if(nrow(tail_issues) != 0) {
@@ -445,6 +470,7 @@ validate_tail <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with weight issues
+#'@export
 #'
 validate_weight <- function(df) {
   weight_exceptions_small <- c("RCKI", "BCHU", "RUHU", "CAHU")
@@ -465,6 +491,7 @@ validate_weight <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with band code issues
+#'@export
 #'
 validate_bandcode <- function(df) {
   valid_band_code <- c(1, 4, 5, 8, "R", "U")
@@ -481,6 +508,7 @@ validate_bandcode <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with band code/species issues
+#'@export
 #'
 validate_bandcode_species <- function(df) {
   disp_species_issues <- filter(df, (DISPOSITION..band.code. == 4 | DISPOSITION..band.code. == 8) & !(SPECIES == "BADE" | SPECIES == "BALO"))
@@ -495,6 +523,7 @@ validate_bandcode_species <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with status issues
+#'@export
 #'
 validate_status <- function(df) {
   valid_status <- c(300, 500)
@@ -511,6 +540,7 @@ validate_status <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with status 500 issues
+#'@export
 #'
 validate_status_500 <- function(df) {
   status_500_issues <- filter(df, STATUS == 500, (is.na(DISP) | is.na(NOTES)))
@@ -526,6 +556,7 @@ validate_status_500 <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with disp issues
+#'@export
 #'
 validate_disp <- function(df) {
   valid_disp <- c("M", "O", "I", "S", "E", "D", "T", "W", "B", "L", "P", NA)
@@ -543,6 +574,7 @@ validate_disp <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with disp/status issues
+#'@export
 #'
 validate_disp_status <- function(df) {
   disp_status_issues <- filter(df, !is.na(DISP), (STATUS != 500 | is.na(NOTES)))
@@ -558,6 +590,7 @@ validate_disp_status <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with year issues
+#'@export
 #'
 validate_year <- function(df) {
   year_issues <- filter(df, YYYY < 1997)
@@ -572,6 +605,7 @@ validate_year <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with year/species issues
+#'@export
 #'
 validate_year_species <- function(df) {
   year_band_issues <- filter(df, is.na(YYYY) & !(SPECIES == "BADE" | SPECIES == "BALO"))
@@ -586,6 +620,7 @@ validate_year_species <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with month issues
+#'@export
 #'
 validate_month <- function(df) {
   month_issues <- filter(df, MM < 2 | MM > 11)
@@ -600,6 +635,7 @@ validate_month <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with month/species issues
+#'@export
 #'
 validate_month_species <- function(df) {
   month_band_issues <- filter(df, is.na(MM) & !(SPECIES == "BADE" | SPECIES == "BALO"))
@@ -614,6 +650,7 @@ validate_month_species <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with day issues
+#'@export
 #'
 validate_day <- function(df) {
   day_issues <- filter(df, DD < 1 | DD > 31)
@@ -628,6 +665,7 @@ validate_day <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with day/species issues
+#'@export
 #'
 validate_day_species <- function(df) {
   day_band_issues <- filter(df, is.na(DD) & !(SPECIES == "BADE" | SPECIES == "BALO"))
@@ -646,6 +684,7 @@ validate_day_species <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with cap time issues
+#'@export
 #'
 validate_captime <- function(df) {
   cap_issues <- filter(df, is.na(NOTES), (CAP.TIME < 650 | CAP.TIME > 1300) | (CAP.TIME %% 10 != 0))
@@ -662,6 +701,7 @@ validate_captime <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with net issues
+#'@export
 #'
 validate_net <- function(df) {
   valid_nets <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, NA)
@@ -678,6 +718,7 @@ validate_net <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with notes issues
+#'@export
 #'
 validate_notes <- function(df) {
   note_issues <- filter(df, grepl("ff|flat flies|mites|mite|lice|louse|fly", tolower(NOTES)), Parasites. != "Y")
@@ -695,6 +736,7 @@ validate_notes <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with EY issues
+#'@export
 #'
 validate_ey <- function(df) {
   ey_exceptions <- c("SPTO", "DOWO", "NOFL", "RSFL", "HAWO", "DEJU", "ORJU", "SCJU", "UDEJ")
@@ -710,6 +752,7 @@ validate_ey <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/how aged issues
+#'@export
 #'
 validate_age_ha <- function(df) {
   valid_ha_0 <- c("IC", NA)
@@ -738,6 +781,7 @@ validate_age_ha <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with age/how sexed issues
+#'@export
 #'
 validate_age_hs <- function(df) {
   valid_hs_0 <- c("IC", NA)
@@ -760,6 +804,7 @@ validate_age_hs <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with parasite column issues
+#'@export
 #'
 validate_parasites <- function(df) {
   parasite_issues <- filter(df, Parasites. == "Y", is.na(NOTES))
@@ -774,6 +819,7 @@ validate_parasites <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with ha/ha2 issues
+#'@export
 #'
 validate_ha_ha2 <- function(df) {
   haha2_issues <- filter(df, !is.na(HA), !is.na(HA2), as.character(HA) == as.character(HA2))
@@ -788,6 +834,7 @@ validate_ha_ha2 <- function(df) {
 #'
 #'@param df bird data frame
 #'@return data frame of rows with hs/hs2 issues
+#'@export
 #'
 validate_hs_hs2 <- function(df) {
   hshs2_issues <- filter(df, !is.na(HS), !is.na(HS2), as.character(HS) == as.character(HS2))

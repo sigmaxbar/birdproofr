@@ -1,5 +1,6 @@
 #'
 #'Runs birdproofr Shiny app
+#'@export
 #'
 run_birdproofr_app <- function() {
   ui <- fluidPage(
