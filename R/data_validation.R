@@ -328,7 +328,7 @@ validate_location <- function(df) {
 #'@export
 #'
 validate_bandsize <- function(df) {
-  valid_band_sizes <- c("OA", "O", 1, "1B", "1A", "1C", 2, 3, "3A", "3B", "U", "R")
+  valid_band_sizes <- c("0A", 0, 1, "1B", "1A", "1C", 2, 3, "3A", "3B", "U", "R")
   band_size_issues <- filter(df, !(BANDSIZE %in% valid_band_sizes))
   if(nrow(band_size_issues) != 0) {
     band_size_issues[,"Issue"] <- "Band size invalid. Acceptable values: 0A 0 1 1B 1A 2 3 3A 3B U R"
@@ -494,7 +494,7 @@ validate_weight <- function(df) {
 #'@export
 #'
 validate_bandcode <- function(df) {
-  valid_band_code <- c(1, 4, 5, 8, "R", "U")
+  valid_band_code <- c(1, 4, 5, 8, "R", "U", "N")
   band_code_issues <- filter(df, !(DISPOSITION..band.code. %in% valid_band_code))
   if(nrow(band_code_issues) != 0) {
     band_code_issues[,"Issue"] <- "Invalid band code"

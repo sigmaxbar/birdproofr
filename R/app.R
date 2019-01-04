@@ -4,7 +4,7 @@
 #'
 run_birdproofr_app <- function() {
   ui <- fluidPage(
-    titlePanel("birdproofr (v1.0.0)"),
+    titlePanel("birdproofr (v1.0.1)"),
     sidebarLayout(
       sidebarPanel(
         fileInput("csvInput", "Upload (.csv)", accept=c("text/csv","text/comma-separated-values",".csv")),

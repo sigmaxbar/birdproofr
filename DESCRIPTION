@@ -1,6 +1,6 @@
 Package: birdproofr
 Title: Bird Banding Data Validator
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person(given = "Thea",
            family = "Sukianto",
