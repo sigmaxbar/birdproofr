@@ -3,7 +3,7 @@ Bird Banding Data Validator
 ## About
 birdproofr is a package of R tools for bird banding data validation under a set of rules written by Heidi Ware Carlisle, Intermountain Bird Observatory. The validator can be ran as a Shiny app for convenience, which includes utilities for viewing and downloading flagged data. Individual attributes can also be validated through function calls from the R console - please see IBO ruleset. The current birdproofr build has been updated for Fall 2018 banding. Support for a hummingbird ruleset is planned.
 ## Live App
-[https://twotailstats.github.io/dev/birdproofr](https://twotailstats.github.io/dev/birdproofr)
+[https://sigmaxbar.github.io/dev/birdproofr](https://sigmaxbar.github.io/dev/birdproofr)
 ## Usage / Dependencies (R Package)
 Installing birdproofr requires a working installation of R (>= 3.5.0), which can be accessed through the command line or RStudio. To install from the console, ensure the [devtools](https://github.com/r-lib/devtools) package is present and loaded:
 ### Install and Load devtools
@@ -21,7 +21,7 @@ Additionally, birdproofr depends on [shiny](https://github.com/rstudio/shiny) an
 
 > library(dplyr)
 ### Install and Load birdproofr
-> devtools::install_github("twotailstats/birdproofr")
+> devtools::install_github("sigmaxbar/birdproofr")
 
 > library(birdproofr)
 
@@ -30,7 +30,7 @@ The birdproofr functions are now ready for use. For example, run the Shiny app:
 > run_birdproofr_app()
 
 ## Functions
-Please see the [birdproofr manual](https://github.com/twotailstats/birdproofr/blob/master/manual.pdf) for more information.
+Please see the [birdproofr manual](https://github.com/sigmaxbar/birdproofr/blob/master/manual.pdf) for more information.
 
 ## Changelog
 ### v1.0.0 (December 31, 2018)
