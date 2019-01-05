@@ -328,10 +328,10 @@ validate_location <- function(df) {
 #'@export
 #'
 validate_bandsize <- function(df) {
-  valid_band_sizes <- c("0A", 0, 1, "1B", "1A", "1C", 2, 3, "3A", "3B", "U", "R")
+  valid_band_sizes <- c("0A", "0", "0.00", "1", "1.00", "1B", "1A", "1C", "2", "2.00", "3", "3.00", "3A", "3B", "U", "R")
   band_size_issues <- filter(df, !(BANDSIZE %in% valid_band_sizes))
   if(nrow(band_size_issues) != 0) {
-    band_size_issues[,"Issue"] <- "Band size invalid. Acceptable values: 0A 0 1 1B 1A 2 3 3A 3B U R"
+    band_size_issues[,"Issue"] <- "Invalid band code"
   }
   return(band_size_issues)
 }
@@ -487,7 +487,7 @@ validate_weight <- function(df) {
 
 #'
 #'Validate band code. Make sure there are no
-#'blanks. Make sure the only values used are 1,R,4,5,8,R,U.
+#'blanks. Make sure the only values used are 1,R,4,5,8,N,U.
 #'
 #'@param df bird data frame
 #'@return data frame of rows with band code issues
