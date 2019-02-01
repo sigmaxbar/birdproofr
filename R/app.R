@@ -1,8 +1,11 @@
 #'
 #'Runs birdproofr Shiny app
+#'
 #'@export
 #'
 run_birdproofr_app <- function() {
+  require("dplyr")
+  require("shiny")
   ui <- fluidPage(
     titlePanel("birdproofr (v1.0.1)"),
     sidebarLayout(
