@@ -1,11 +1,7 @@
 *
 !/.gitignore
 !/.Rbuildignore
-<<<<<<< HEAD
 inst/
 birdproofr_live/
 .Rproj.user
 dev/
-=======
-data/
->>>>>>> f7d98f015e918780c73fa1b3759962e19ddf8bc3

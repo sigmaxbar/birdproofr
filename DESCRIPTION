@@ -5,17 +5,10 @@ Authors@R:
     person(given = "Thea",
            family = "Sukianto",
            role = c("aut", "cre"),
-<<<<<<< HEAD
            email = "theophiliasukian@boisestate.edu")
 Description: birdproofr is a package of R tools for bird banding data validation under a set of rules written by Heidi Ware Carlisle, Intermountain Bird Observatory. The validator can be ran as a Shiny app for convenience, which includes utilities for viewing and downloading flagged data. Individual attributes can also be validated through function calls from the R console - please see IBO ruleset. The current birdproofr build has been updated for Fall 2018 banding. Support for a hummingbird ruleset is planned.
 Depends: R (>= 3.5.0)
 Imports: shiny (>= 1.2.0), dplyr (>= 0.7.0), shinycssloaders (>= 0.2.0), shinythemes (>= 1.1.0), shinyWidgets (>= 0.4.0)
-=======
-           email = "theophiliasukian@u.boisestate.edu")
-Description: birdproofr is a package of R tools for bird banding data validation under a set of rules written by Heidi Ware Carlisle, Intermountain Bird Observatory. The validator can be ran as a Shiny app for convenience, which includes utilities for viewing and downloading flagged data. Individual attributes can also be validated through function calls from the R console - please see IBO ruleset. The current birdproofr build has been updated for Fall 2018 banding. Support for a hummingbird ruleset is planned.
-Depends: R (>= 3.3.0)
-Imports: shiny (>= 1.2.0), dplyr (>= 0.7.5)
->>>>>>> f7d98f015e918780c73fa1b3759962e19ddf8bc3
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

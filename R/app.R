@@ -1,12 +1,10 @@
 #'
 #'Runs birdproofr Shiny app
-#'
 #'@export
 #'
 run_birdproofr_app <- function() {
   require("dplyr")
   require("shiny")
-<<<<<<< HEAD
   require("shinycssloaders")
   require("shinythemes")
   require("shinyWidgets")
@@ -38,24 +36,6 @@ run_birdproofr_app <- function() {
                tableOutput("flags")
              ))
 
-=======
-  ui <- fluidPage(
-    titlePanel("birdproofr (v1.0.1)"),
-    sidebarLayout(
-      sidebarPanel(
-        fileInput("csvInput", "Upload (.csv)", accept=c("text/csv","text/comma-separated-values",".csv")),
-        #selectInput("birdInput", "Bird", choices = c("Songbird", "Hummingbird")),
-        actionButton("validateButton", "Show Flags"),
-        downloadButton("download", "Download Flags (.csv)")
-      ),
-      mainPanel(
-        tabsetPanel(type = "tabs",
-                    tabPanel("Data", tableOutput("data")),
-                    tabPanel("Flagged Issues", tableOutput("flags"))
-        ) #tabsetPanel
-      ) #mainPanel
-    )#sidebarLayout
->>>>>>> f7d98f015e918780c73fa1b3759962e19ddf8bc3
   ) #ui
 
   server <- function(input, output) {
