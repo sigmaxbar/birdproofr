@@ -33,15 +33,23 @@ The birdproofr functions are now ready for use. For example, run the Shiny app:
 Please see the [birdproofr manual](https://github.com/sigmaxbar/birdproofr/blob/master/manual.pdf) for more information.
 
 ## Changelog
+### v1.0.2 (February 2, 2019)
+- Fix Age 1/how aged combinations
+- Add status 000
+- Clean data prior to loading, ignore whitespace
+- Add shiny theme
+
 ### v1.0.1 (January 4, 2019)
 - Fix band code and band size rules
 
 ### v1.0.0 (December 31, 2018)
 - Convert 2017 Java build to R
 - Launch R package on GitHub
-- Launch live app on twotailstats site
+- Launch live app on sigmaxbar site
 
+## Questions?
 
+Contact [Thea Sukianto](mailto:theophiliasukian@boisestate.edu).
 
 
 

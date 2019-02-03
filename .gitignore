@@ -1,0 +1,7 @@
+*
+!/.gitignore
+!/.Rbuildignore
+inst/
+birdproofr_live/
+.Rproj.user
+dev/

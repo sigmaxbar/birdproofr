@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^inst$
+^birdproofr_live$
+^dev$
+^LICENSE

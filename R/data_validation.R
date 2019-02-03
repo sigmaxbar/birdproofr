@@ -1,11 +1,11 @@
 #'
-#'Validate all columns, then store issues as a list of data frames
+#'Validate all columns, then store issues as a data frame
 #'
 #'@param df bird data frame
-#'@return list of issue data frames
+#'@return issues data frame
 #'@export
 #'
-validate_all_list <- function(df) {
+validate_all <- function(df) {
   all_list <- list(validate_species(df), validate_age(df), validate_sex(df),
        validate_age_bp_cp(df), validate_sex_hs(df), validate_bp_hs(df),
        validate_cp_hs(df), validate_ffmolt(df), validate_bp(df),
@@ -23,7 +23,22 @@ validate_all_list <- function(df) {
        validate_age_ha(df), validate_age_hs(df), validate_parasites(df),
        validate_ha_ha2(df), validate_hs_hs2(df)
   )
-  return(all_list)
+
+  colnames(df)[colnames(df) == "Original.Order.on.hard.copy"] <- "Order"
+  colnames(df)[colnames(df) == "proofing.and.data.entry.notes"] <- "Issue"
+
+  out_df <- data.frame()
+
+  for(i_df in all_list) {
+    if(nrow(i_df) != 0) {
+      #i_df <- subset(i_df, select=c(Order, Issue))
+      out_df <- rbind(out_df, i_df)
+    }
+  }
+
+  #out_df <- out_df[order(out_df$Order),]
+
+  return(out_df)
 }
 
 
@@ -36,12 +51,12 @@ validate_all_list <- function(df) {
 #'@export
 #'
 validate_species <- function(df) {
-  valid_species_list <- c("amgo", "amke", "amre", "amro", "auwa", "bade", "balo", "bcch", "bewr", "bggn",
-                          "bhco", "bhgr", "brcr", "brsp", "btyw", "buor", "bush", "cafi", "cahu", "canw", "caqu", "cavi", "cbch",
+  valid_species_list <- c("amgo", "amke", "amre", "amro", "auwa", "bade", "balo", "bcch", "bchu", "bewr", "bggn",
+                          "bhco", "bhgr", "brcr", "brsp", "btyw", "buhu", "buor", "bush", "cafi", "cahu", "canw", "caqu", "cavi", "cbch",
                           "cedw", "chsp", "coha", "coni", "copo", "deju", "dowo", "dufl", "evgr", "flow", "fosp", "gcki", "gcsp",
                           "grca", "grfl", "gtto", "gwcs", "hafl", "hawo", "heth", "hewa", "hofi", "howr", "lazb", "lefl", "lego",
                           "lisp", "mgwa", "moch", "mwcs", "mywa", "nawa", "nofl", "nopo", "ocwa", "orju", "osfl", "pawr", "pisi",
-                          "rbnu", "rcki", "recr", "rnsa", "rowr", "rsfl", "sath", "savs", "sosp", "spto", "ssha", "stja", "swth",
+                          "rbnu", "rcki", "recr", "rnsa", "rowr", "rsfl", "ruhu", "sath", "savs", "sosp", "spto", "ssha", "stja", "swth",
                           "tewa", "toso", "towa", "udej", "uyrw", "vath", "vesp", "wavi", "wbnu", "wcsp", "webl", "wefl", "weta",
                           "wewp", "wifl", "wiwa", "ybch", "yewa", "yrwa")
 
@@ -262,7 +277,7 @@ validate_ffwear <- function(df) {
 #'
 validate_muscle <- function(df) {
   valid_muscle_list <- c(1, 2, 2.5, 3, 4, 5, NA)
-  muscle_issues <- filter(df, !(Muscle %in% valid_muscle_list) | (is.na(NOTES) & (Muscle == 1 | Muscle == 2)))
+  muscle_issues <- filter(df, !(Muscle %in% valid_muscle_list) | (is.na(NOTES) & is.na(proofing.and.data.entry.notes) & (Muscle == 1 | Muscle == 2)))
   if(nrow(muscle_issues) != 0) {
     muscle_issues[, "Issue"] <- "Muscle value invalid. Value must be 2.5 3 4 or 5. 1 and 2 with notes is acceptable"
   }
@@ -331,7 +346,7 @@ validate_bandsize <- function(df) {
   valid_band_sizes <- c("0A", "0", "0.00", "1", "1.00", "1B", "1A", "1C", "2", "2.00", "3", "3.00", "3A", "3B", "U", "R")
   band_size_issues <- filter(df, !(BANDSIZE %in% valid_band_sizes))
   if(nrow(band_size_issues) != 0) {
-    band_size_issues[,"Issue"] <- "Invalid band code"
+    band_size_issues[,"Issue"] <- "Invalid band size"
   }
   return(band_size_issues)
 }
@@ -526,7 +541,7 @@ validate_bandcode_species <- function(df) {
 #'@export
 #'
 validate_status <- function(df) {
-  valid_status <- c(300, 500)
+  valid_status <- c("300", "500", "000")
   status_issues <- filter(df, !(STATUS %in% valid_status))
   if(nrow(status_issues) != 0) {
     status_issues[,"Issue"] <- "Invalid status"
@@ -543,7 +558,7 @@ validate_status <- function(df) {
 #'@export
 #'
 validate_status_500 <- function(df) {
-  status_500_issues <- filter(df, STATUS == 500, (is.na(DISP) | is.na(NOTES)))
+  status_500_issues <- filter(df, STATUS == "500", (is.na(DISP) | (is.na(NOTES) & is.na(proofing.and.data.entry.notes))))
   if(nrow(status_500_issues) != 0) {
     status_500_issues[,"Issue"] <- "If status is 500, disp and notes cannot be blank"
   }
@@ -577,11 +592,27 @@ validate_disp <- function(df) {
 #'@export
 #'
 validate_disp_status <- function(df) {
-  disp_status_issues <- filter(df, !is.na(DISP), (STATUS != 500 | is.na(NOTES)))
+  disp_status_issues <- filter(df, !is.na(DISP), (STATUS != "500" | is.na(NOTES)))
   if(nrow(disp_status_issues) != 0) {
     disp_status_issues[,"Issue"] <- "If disp is not empty, status must be 500 and notes must be filled"
   }
   return(disp_status_issues)
+}
+
+#'
+#'Validate bandcode-status combinations.
+#'Any bird with code U has status 000 as valid.
+#'
+#'@param df bird data frame
+#'@return data frame of rows with bandcode/status issues
+#'@export
+#'
+validate_bandcode_status <- function(df) {
+  bandcode_status_issues <- filter(df, STATUS == "000", DISPOSITION..band.code. != "U")
+  if(nrow(bandcode_status_issues) != 0) {
+    bandcode_status_issues[,"Issue"] <- "Status 000 can only be paired with U band code"
+  }
+  return(bandcode_status_issues)
 }
 
 #'
@@ -713,15 +744,15 @@ validate_net <- function(df) {
 }
 
 #'
-#'Validate notes. Check that notes that mention either, FF, flat flies, or mites, lice,
-#'louse, mite, fly have a Y for parasite column
+#'Validate notes. Check that notes that mention either flat flies, or mites, lice,
+#'louse, mite have a Y for parasite column
 #'
 #'@param df bird data frame
 #'@return data frame of rows with notes issues
 #'@export
 #'
 validate_notes <- function(df) {
-  note_issues <- filter(df, grepl("ff|flat flies|mites|mite|lice|louse|fly", tolower(NOTES)), Parasites. != "Y")
+  note_issues <- filter(df, grepl("flat flies|mites|mite|lice|louse", tolower(NOTES)), Parasites. != "Y")
   if(nrow(note_issues) != 0) {
     note_issues[,"Issue"] <- "If notes mention lice, flies, or mites, parasite column must be Y"
   }
@@ -756,8 +787,8 @@ validate_ey <- function(df) {
 #'
 validate_age_ha <- function(df) {
   valid_ha_0 <- c("IC", NA)
-  valid_ha_1 <- c("PL", "NL", "EY", "FF", "MB", "PC", "MR", "FB")
-  valid_ha2_1 <- c("SK", "TS", NA)
+  valid_ha_1 <- c("FF", "PC", "TS", "MR", "NL", "SK", "EY", "PL", "MB")
+  valid_ha2_1 <- c("FF", "PC", "TS", "MR", "NL", "SK", "EY", "PL", "MB", NA)
   valid_ha2_5 <- c("PL", "EY", "FF", "MB", "PC", "MR", "SK", "TS", NA)
   valid_ha_2 <- c("PL", "EY", "FF", "MB", "PC", "LP", "MR", "SK", "TS")
   valid_ha2_2 <- c("PL", "EY", "FF", "MB", "PC", "LP", "MR", "SK", "TS", NA)
@@ -807,7 +838,7 @@ validate_age_hs <- function(df) {
 #'@export
 #'
 validate_parasites <- function(df) {
-  parasite_issues <- filter(df, Parasites. == "Y", is.na(NOTES))
+  parasite_issues <- filter(df, Parasites. == "Y", is.na(NOTES), is.na(proofing.and.data.entry.notes))
   if(nrow(parasite_issues) != 0) {
     parasite_issues[,"Issue"] <- "If parasites column contains Y notes cannot be blank"
   }

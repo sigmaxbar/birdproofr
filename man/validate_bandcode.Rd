@@ -3,7 +3,7 @@
 \name{validate_bandcode}
 \alias{validate_bandcode}
 \title{Validate band code. Make sure there are no
-blanks. Make sure the only values used are 1,R,4,5,8,R,U.}
+blanks. Make sure the only values used are 1,R,4,5,8,N,U.}
 \usage{
 validate_bandcode(df)
 }
@@ -15,5 +15,5 @@ data frame of rows with band code issues
 }
 \description{
 Validate band code. Make sure there are no
-blanks. Make sure the only values used are 1,R,4,5,8,R,U.
+blanks. Make sure the only values used are 1,R,4,5,8,N,U.
 }

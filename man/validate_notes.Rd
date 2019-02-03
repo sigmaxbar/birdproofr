@@ -2,8 +2,8 @@
 % Please edit documentation in R/data_validation.R
 \name{validate_notes}
 \alias{validate_notes}
-\title{Validate notes. Check that notes that mention either, FF, flat flies, or mites, lice,
-louse, mite, fly have a Y for parasite column}
+\title{Validate notes. Check that notes that mention either flat flies, or mites, lice,
+louse, mite have a Y for parasite column}
 \usage{
 validate_notes(df)
 }
@@ -14,6 +14,6 @@ validate_notes(df)
 data frame of rows with notes issues
 }
 \description{
-Validate notes. Check that notes that mention either, FF, flat flies, or mites, lice,
-louse, mite, fly have a Y for parasite column
+Validate notes. Check that notes that mention either flat flies, or mites, lice,
+louse, mite have a Y for parasite column
 }
