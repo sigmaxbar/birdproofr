@@ -1,4 +1,50 @@
 #'
+#'Cleans bird data frame before validating, e.g. for mystery whitespace
+#'
+#'@param df bird data frame
+#'@return cleaned df
+#'@export
+clean_df <- function(df) {
+  require("dplyr")
+  df <- df[,1:40]
+  colnames(df) <- c("Original.Order.on.hard.copy", "Who.entered", "PAGE..", "LOCATION",
+                    "BANDSIZE", "DISPOSITION..band.code.", "Bander", "BAND..",
+                    "SPECIES", "AGE", "HA", "HA2",
+                    "SEX", "HS", "HS2", "SKULL",
+                    "BP", "CP", "FAT", "Muscle",
+                    "B.MLT", "FF.MLT", "FF.WEAR", "WING",
+                    "TAIL", "WEIGHT", "STATUS", "DATE",
+                    "YYYY", "MM", "DD", "JULIAN",
+                    "CAP.TIME", "SITE", "NET..", "Parasites.",
+                    "DISP", "PARASITE.NOTES", "NOTES", "proofing.and.data.entry.notes")
+  df <- df %>%
+    dplyr::mutate(
+      Original.Order.on.hard.copy = as.integer(as.character(Original.Order.on.hard.copy)),
+      PAGE.. = as.integer(as.character(PAGE..)),
+      AGE = as.integer(as.character(AGE)),
+      SKULL = as.integer(as.character(SKULL)),
+      BP = as.integer(as.character(BP)),
+      CP = as.integer(as.character(CP)),
+      FAT = as.integer(as.character(FAT)),
+      Muscle = as.integer(as.character(Muscle)),
+      B.MLT = as.integer(as.character(B.MLT)),
+      FF.MLT = as.integer(as.character(FF.MLT)),
+      FF.WEAR = as.integer(as.character(FF.WEAR)),
+      WING = as.integer(as.character(WING)),
+      TAIL = as.integer(as.character(TAIL)),
+      WEIGHT = as.numeric(as.character(WEIGHT)),
+      STATUS = as.character(STATUS),
+      MM = as.integer(as.character(MM)),
+      DD = as.integer(as.character(DD)),
+      JULIAN = as.integer(as.character(JULIAN)),
+      CAP.TIME = as.integer(as.character(CAP.TIME)),
+      NET.. = as.integer(as.character(NET..))
+    )
+  return(df)
+}
+
+
+#'
 #'Validate all columns, then store issues as a data frame
 #'
 #'@param df bird data frame
