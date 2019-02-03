@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^inst$
 ^birdproofr_live$
 ^dev$
 ^LICENSE
+=======
+^data$
+^.*\.Rproj$
+^\.Rproj\.user$
+>>>>>>> f7d98f015e918780c73fa1b3759962e19ddf8bc3
